@@ -47,6 +47,10 @@ const nestingValid = [
   { code: '<label><span><span><span><span>A label</span><input /></span></span></span></label>', options: [{ depth: 5 }] },
   { code: '<label><span><span><span><span aria-label="A label" /><input /></span></span></span></label>', options: [{ depth: 5 }] },
   { code: '<label><span><span><span><input aria-label="A label" /></span></span></span></label>', options: [{ depth: 5 }] },
+  { code: '<label>{() => <input />}</label>' },
+  { code: '<label>{true && <input />}</label>' },
+  { code: '<label>{true ? <input /> : null}</label>' },
+  { code: '<label>{true ? true ? <input /> : null : null}</label>' },
   // Custom controlComponents.
   { code: '<label><span>A label<CustomInput /></span></label>', options: [{ controlComponents: ['CustomInput'] }] },
   { code: '<CustomLabel><span>A label<CustomInput /></span></CustomLabel>', options: [{ controlComponents: ['CustomInput'], labelComponents: ['CustomLabel'] }] },
@@ -92,6 +96,10 @@ const nestingInvalid = [
   { code: '<label><span><span><span><span>A label</span><input /></span></span></span></label>', options: [{ depth: 5 }], errors: [expectedError] },
   { code: '<label><span><span><span><span aria-label="A label" /><input /></span></span></span></label>', options: [{ depth: 5 }], errors: [expectedError] },
   { code: '<label><span><span><span><input aria-label="A label" /></span></span></span></label>', options: [{ depth: 5 }], errors: [expectedError] },
+  { code: '<div><label>{t("some.translation")}</label><input type="text" id="id" /></div>', errors: [expectedError] },
+  { code: '<label>{}</label>', errors: [expectedError] },
+  { code: '<label>{true && <span />}</label>', errors: [expectedError] },
+  { code: '<label>{true ? <span /> : <div />}</label>', errors: [expectedError] },
   // Custom controlComponents.
   { code: '<label><span>A label<CustomInput /></span></label>', options: [{ controlComponents: ['CustomInput'] }], errors: [expectedError] },
   { code: '<CustomLabel><span>A label<CustomInput /></span></CustomLabel>', options: [{ controlComponents: ['CustomInput'], labelComponents: ['CustomLabel'] }], errors: [expectedError] },

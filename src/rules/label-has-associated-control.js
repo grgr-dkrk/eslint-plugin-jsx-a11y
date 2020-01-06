@@ -68,7 +68,6 @@ module.exports = {
       const hasNestedControl = controlComponents.some(name => mayContainChildComponent(
         node,
         name,
-        recursionDepth,
       ));
       const hasAccessibleLabel = mayHaveAccessibleLabel(
         node,
